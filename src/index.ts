@@ -40,4 +40,30 @@ app.post('/users', async (request: Request, response: Response) => {
   return response.status(201).json(user);
 })
 
+app.put('/users', async(request: Request, response: Response) => {
+  const {name, email} = request.body;
+
+  const user =  await prisma.user.update({
+    where: {
+      email
+    },
+    data: {
+      name
+    }
+  })
+
+  return response.status(200).json(user);
+});
+
+app.delete('/users', async(request: Request, response: Response) => {
+  const {email} = request.body;
+  await prisma.user.delete({
+    where: {
+      email
+    }
+  })
+
+  response.status(204).end();
+})
+
 app.listen(3000, () => console.log(`http://localhost:3000`));

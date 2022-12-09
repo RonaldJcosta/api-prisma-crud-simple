@@ -11,9 +11,9 @@ app.get('/users', async (request: Request, response: Response) => {
     include: {
       posts: true
     }
-  });
+});
 
-  return response.status(200).json(users);
+return response.status(200).json(users);
 });
 
 app.post('/users', async (request: Request, response: Response) => {
